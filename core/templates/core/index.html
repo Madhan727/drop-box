@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-card">
+    <div class="split-left" id="drop-section">
+        <h2>Drop Files</h2>
+        <p class="section-desc">Drag & drop files or folders (Max 5 files, 2.5GB)</p>
+
+        <div class="drop-zone" id="drop-zone">
+            <div class="drop-icon">📂</div>
+            <p>Drag files/folders here</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">or click to browse</p>
+            <input type="file" id="file-input" multiple style="display: none;">
+        </div>
+
+        <div id="file-list-container" class="file-list">
+            <!-- Files will appear here -->
+        </div>
+
+        <textarea id="global-context" class="global-context"
+            placeholder="Add a context message (Required before dropping)..."></textarea>
+
+        <button id="btn-drop" class="btn">Drop Files</button>
+    </div>
+
+    <!-- Success State for Drop -->
+    <div class="split-left success-card" id="drop-success" style="display: none;">
+        <h2>Files Dropped!</h2>
+        <p class="section-desc">Share this code to retrieve files.</p>
+        <div class="drop-code-display" id="generated-code"></div>
+        <p class="section-desc">Valid for 7 hours</p>
+        <button class="btn btn-secondary" onclick="location.reload()">Send More</button>
+    </div>
+
+    <div class="split-right" id="retrieve-section">
+        <h2>Retrieve</h2>
+        <p class="section-desc">Enter a unique drop code</p>
+
+        <div class="code-input-group">
+            <input type="text" id="retrieve-code" class="code-input" placeholder="000000" maxlength="6">
+            <button id="btn-retrieve" class="btn" style="width: auto;">→</button>
+        </div>
+
+        <div id="retrieved-content" style="display: none; margin-top: 1.5rem;">
+            <div class="global-context" id="retrieved-context" readonly></div>
+            <div id="retrieved-files" class="file-list"></div>
+            <button id="btn-download-all" class="btn" style="margin-top: 1rem;">Download All (.zip)</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
